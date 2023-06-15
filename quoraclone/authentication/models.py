@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from topics.models import Topic
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -43,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     profile_picture = models.ImageField(upload_to='profile_pictures/')
     is_staff = models.BooleanField(default=False)
+    topics = models.ManyToManyField(Topic, related_name='users')
 
     USERNAME_FIELD = 'email'
     objects = CustomUserManager()
