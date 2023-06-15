@@ -24,6 +24,7 @@ def signup_user(request):
     return render(request, 'sign-up.html', {'form': form})
 
 
+@ensure_csrf_cookie
 def login_user(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)

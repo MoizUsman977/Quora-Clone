@@ -1,0 +1,84 @@
+body{
+    margin:0;
+    padding:0;
+}
+.signup-box{
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    padding: 60px;
+}
+.form-root{
+    width: 100%;
+}
+.slogan{
+    color: #636466
+}
+.form-root > ul {
+    list-style: none;
+}
+.form-root > ul > li{
+    text-align: center;
+    color: red;
+}
+.form-root > p > input{
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    border: 1px solid #dee0e1;
+    padding: 0px 10px;
+    box-sizing:border-box;
+}
+.form-root > p > select{
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    border: 1px solid #dee0e1;
+    padding: 0px 10px;
+    box-sizing:border-box;
+    background-color: white;
+}
+.form-root > p > input:focus{
+    outline: none;
+}
+.form-root > p > select:focus{
+    outline: none;
+}
+.signup-button{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
+.signup-button > span{
+    box-sizing: border-box;
+    font-size: 16px;
+    color: grey;
+    text-decoration: underline;
+}
+.signup-button > button{
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background-color: rgb(74, 24, 255);
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 10px 30px;
+    font-weight: 400;
+    color: white;
+}
+.signup-button > button:hover{
+    cursor: pointer;
+}
+.login-route{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
