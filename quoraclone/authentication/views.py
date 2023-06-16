@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .forms import UserForm, LoginForm
 from .models import User
@@ -18,7 +17,7 @@ def signup_user(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('user_list')
+                return redirect('home')
     else:
         form = UserForm()
     return render(request, 'sign-up.html', {'form': form})
@@ -34,15 +33,9 @@ def login_user(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('user_list')
+                return redirect('home')
             else:
                 form.add_error(None, 'Invalid email or password.')
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
-
-
-@login_required
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'user_list.html', {'users': users})
