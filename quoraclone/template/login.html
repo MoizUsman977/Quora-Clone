@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href=" {% static '/styles/login.css' %} ">
+    <title>Quora Clone</title>
+</head>
+<style>
+    .login-root {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url('{% static '/images/signup-bg.webp' %}');
+    }
+</style>
+<body>
+    <div class="login-root">
+        <div class="login-box">
+            <img src="{% static '/images/quora-logo.png' %}" width="200px" />
+            <b class="slogan">A place to share knowledge and better understand the world</b>
+            <form class="form-root" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="login-button">
+                    <span>Forgot Your Password</span>
+                    <button type="submit">Login</button>
+                </div>
+                <div class="signup-route">
+                    <span>Don't Have A Account? <a href="sign-up">Sign Up</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
