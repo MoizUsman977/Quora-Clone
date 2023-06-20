@@ -1,0 +1,8 @@
+{% extends 'user-profile.html' %}
+
+{% block topic %}
+<h1>Your Topics</h1>
+{% for topic in user_topics%}
+    <p>{{ topic.title }}</p>
+{% endfor %}
+{% endblock %}

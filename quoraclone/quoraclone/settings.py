@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'topics',
-    'qna'
+    'qna',
+    'userprofile'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block userProfile %}
+    <div>
+        <span>Moiz</span>
+    </div>
+    <div>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'answers' %}">Answers</a>
+        <a href="{% url 'questions' %}">Questions</a>
+        <a href="{% url 'usertopics' %}">Topics</a>
+        <a href="#">Following</a>
+    </div>
+    <div>{{ my_data }}</div>
+    
+        {% block profile %}
+        {% endblock profile %}
+    
+        {% block answer %}
+        {% endblock answer %}
+        
+        {% block question %}
+        {% endblock question %}
+        
+        {% block topic %}
+        {% endblock topic %}
+    {% endblock userProfile %}

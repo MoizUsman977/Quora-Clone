@@ -1,0 +1,10 @@
+{% extends 'user-profile.html' %}
+
+{% block profile %}
+<h1>User Profile</h1>
+<p>Name: {{ user_data.name }}</p>
+<p>Email: {{ user_data.email }}</p>
+<p>Username: {{ user_data.username }}</p>
+<p>Age: {{ user_data.age }}</p>
+<p>Gender: {{ user_data.gender }}</p>
+{% endblock %}

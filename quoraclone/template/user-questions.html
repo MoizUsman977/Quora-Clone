@@ -1,0 +1,8 @@
+{% extends 'user-profile.html' %}
+
+{% block question %}
+<h1>Your Questions</h1>
+{% for question in user_questions%}
+    <p>{{ question }}</p>
+{% endfor %}
+{% endblock %}

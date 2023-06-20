@@ -1,0 +1,8 @@
+{% extends 'user-profile.html' %}
+
+{% block answer %}
+<h1>Your Answers</h1>
+{% for answer in user_answers %}
+    <p>{{ answer }}</p>
+{% endfor %}
+{% endblock %}
