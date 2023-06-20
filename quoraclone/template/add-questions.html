@@ -1,0 +1,10 @@
+{% extends 'topic-page.html' %}
+{% block topic %}
+{% block addquestion %}
+<form class="form-root" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"> Add Question </button>
+</form>
+{% endblock addquestion %}
+{% endblock %}

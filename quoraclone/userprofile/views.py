@@ -5,7 +5,6 @@ from topics.models import Topic
 
 class UserProfile(TemplateView):
     template_name = 'user-profile.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['my_data'] = 'Hello, World!'
@@ -20,7 +19,6 @@ class ProfileData(LoginRequiredMixin, TemplateView):
 
 class UserAnswers(TemplateView):
     template_name = 'user-answers.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
@@ -33,7 +31,6 @@ class UserAnswers(TemplateView):
     
 class UserQuestions(TemplateView):
     template_name = 'user-questions.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
@@ -46,7 +43,6 @@ class UserQuestions(TemplateView):
     
 class UserTopics(TemplateView):
     template_name = 'user-topics.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user

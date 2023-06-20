@@ -18,9 +18,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        import pdb;pdb.set_trace()
-        # def create_superuser(self, email, password=None, **extra_fields):
-            # Set the extra fields for the superuser
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('username', "Fahad1234")
         extra_fields.setdefault('is_superuser', True)

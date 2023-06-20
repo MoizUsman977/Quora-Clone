@@ -6,4 +6,5 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('', include('topics.urls')),
     path('', include('userprofile.urls')),
+    path('', include('qna.urls')),
 ]

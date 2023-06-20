@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% block topic %}
+
+<h1>{{ topic }}</h1>
+<h2>Follow</h2>
+<a href={% url 'add_question' topic_id=topic.id %} >Add Question</a>
+
+{% for question in questions %}
+
+<p>{{ question }}</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.question_id }}
+    {{ form.as_p }}
+    <input type="hidden" name="question_id" value="{{ question.id }}">
+    <input type="submit" value="Submit Answer">
+</form>
+<ul>
+    {% for answer in question.answer_set.all %}
+    <li>{{ answer }} ({{answer.user.username}})</li>
+    {% endfor %}
+</ul>
+
+{% endfor %} 
+{% endblock %}
+
+
+{% block addquestion %}{% endblock addquestion %}
