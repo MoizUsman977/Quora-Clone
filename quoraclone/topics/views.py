@@ -26,11 +26,23 @@ def create_topic(request):
 @login_required
 def home(request):
     topics = Topic.objects.all()
-    return render(request, 'base.html', {'topics': topics})
+    questions = Question.objects.all().order_by('-answer__created_at') 
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            question_id = form.cleaned_data["question_id"]
+            answer_text = form.cleaned_data["answer_text"]
+            question = get_object_or_404(Question, id=question_id)
+            Answer.objects.create(user=request.user, question=question, answer_text=answer_text)
+            return redirect('home')
+    else:
+        form = AnswerForm()
+    return render(request, 'home.html', {'topics': topics, 'questions': questions, 'form': form})
 
 @login_required
 def topic_page(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
+    total_followers = topic.followers.count()
     questions = Question.objects.filter(topic=topic)
     if request.method == "POST":
         form = AnswerForm(request.POST)
@@ -42,4 +54,11 @@ def topic_page(request, topic_id):
             return redirect('topic_questions', topic_id=topic_id)
     else:
         form = AnswerForm()
-    return render(request, 'topic-page.html', {'topic': topic, 'questions': questions, 'form': form})
+    return render(request, 'topic-page.html', {'topic': topic, 'questions': questions, 'form': form, "total_followers":total_followers})
+
+@login_required
+def follow_page(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)    
+    topic.followers.add(request.user)
+    topic.save()
+    return redirect('topic_questions', topic_id=topic_id)

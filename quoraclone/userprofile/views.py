@@ -1,5 +1,8 @@
+from authentication.models import User
 from django.views.generic import TemplateView
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from qna.models import Answer, Question
 from topics.models import Topic
 
@@ -23,9 +26,6 @@ class UserAnswers(TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         answers = Answer.objects.filter(user = user)
-        print(user)
-        for answer in answers:
-            print(answer)
         context['user_answers'] = answers
         return context
     
@@ -35,9 +35,6 @@ class UserQuestions(TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         questions = Question.objects.filter(user = user)
-        print(user)
-        for question in questions:
-            print(question)
         context['user_questions'] = questions
         return context
     
@@ -47,9 +44,15 @@ class UserTopics(TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         topics = Topic.objects.filter(creator = user)
-        print(user)
-        for topic in topics:
-            print(topic)
         context['user_topics'] = topics
         return context
+    
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['name', 'age', 'gender', 'profile_picture']
+    template_name = 'edit-user-data.html'
+    success_url = reverse_lazy('profile') 
+    
+    def get_object(self, queryset=None):
+        return self.request.user
     

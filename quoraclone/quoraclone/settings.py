@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 import os
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 load_dotenv()
 """
 Django settings for quoraclone project.
@@ -44,7 +46,8 @@ INSTALLED_APPS = [
     'authentication',
     'topics',
     'qna',
-    'userprofile'
+    'userprofile',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -95,6 +98,12 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+cloudinary.config( 
+  cloud_name = "dysyntcym", 
+  api_key = "316192689837369", 
+  api_secret = "Qc6qhrVTLV1dy4Vx6t_VBWgQb98" 
+)
 
 
 # Password validation
