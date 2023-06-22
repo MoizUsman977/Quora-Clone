@@ -1,11 +1,18 @@
 {% extends 'user-profile.html' %}
-
+{% load static %}
 {% block profile %}
-<h1>User Profile</h1>
-<h1><a href="{% url 'editUser' %}" >Edit User Data</a></h1>
-<p>Name: {{ user_data.name }}</p>
-<p>Email: {{ user_data.email }}</p>
-<p>Username: {{ user_data.username }}</p>
-<p>Age: {{ user_data.age }}</p>
-<p>Gender: {{ user_data.gender }}</p>
+<div class="root-profile">    
+    <h1>User Profile</h1>
+    <div class="user-data">
+        <p>Name:  <span>{{ user_data.name }} </span></p>
+        <p>Email:  <span>{{ user_data.email }} </span></p>
+        <p>Username:  <span>{{ user_data.username }} </span></p>
+        <p>Age:  <span>{{ user_data.age }} </span></p>
+        <p>Gender:  <span>{{ user_data.gender }} </span></p>
+    </div>
+</div>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
 {% endblock %}

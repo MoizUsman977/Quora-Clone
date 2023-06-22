@@ -10,6 +10,7 @@
   height: 80px;
   padding: 0px 200px;
   box-sizing: border-box;
+  background-color: white;
 }
 .nav-item {
   display: flex;

@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG'),
 
 ALLOWED_HOSTS = []
 
@@ -98,10 +98,10 @@ DATABASES = {
 }
 
 cloudinary.config( 
-  cloud_name = "dysyntcym", 
-  api_key = "316192689837369", 
-  api_secret = "Qc6qhrVTLV1dy4Vx6t_VBWgQb98",
-  secure = True
+  cloud_name = os.environ.get('cloud_name'), 
+  api_key = os.environ.get('cloud_api_key'), 
+  api_secret = os.environ.get('cloud_api_secret'),
+  secure = os.environ.get('cloud_secure'),
 )
 import cloudinary.uploader
 import cloudinary.api

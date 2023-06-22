@@ -1,0 +1,62 @@
+body{
+    background-color: #f1efed;
+}
+.profile-root{
+    font-family: sans-serif !important;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 30%;
+    gap: 5px; 
+    width: 35%;
+}
+.profile-page-user{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+.profile-page-user> a{
+    color: #727272;
+    text-decoration: none;
+    font-size: 14px;
+}
+.profile-page-user> a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.user-name-image{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+.profile-pic{
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    border-radius: 50%;
+}
+.user-name-image > span{
+    font-size: 45px;
+    font-weight: 900;
+}
+.profile-tabs{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 0px;
+}
+.profile-tabs > a{
+    text-decoration: none;
+    color: #727272;
+    padding: 15px 10px;
+}
+.profile-tabs > a:hover{
+    background-color: #e7e6e5;
+    text-decoration: underline;
+    color: red;
+}

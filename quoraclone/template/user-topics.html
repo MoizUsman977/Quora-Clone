@@ -1,8 +1,35 @@
 {% extends 'user-profile.html' %}
-
+{% load static %}
 {% block usertopic %}
-<h1>Your Topics</h1>
-{% for topic in user_topics%}
-    <p>{{ topic.title }}</p>
-{% endfor %}
+<div class="root-topic">
+    <h1>Your Topics</h1>
+    {% for topic in topics_obj %}
+    <div class="user-topics">
+        <p>{{ topics_obj.start_index|add:forloop.counter0 }}: {{topic}}</p>
+    </div>
+    {% endfor %}
+    <br />
+    <div class="pagination">
+        <span class="step-links">
+            {% if topics_obj.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ topics_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ topics_obj.number }} of {{ topics_obj.paginator.num_pages }}.
+            </span>
+
+            {% if topics_obj.has_next %}
+                <a href="?page={{ topics_obj.next_page_number }}">Next</a>
+                <a href="?page={{ topics_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/usertopics.css' %}">
+<link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
 {% endblock usertopic %}

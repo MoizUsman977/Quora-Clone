@@ -26,7 +26,7 @@ def create_topic(request):
 @login_required
 def home(request):
     topics = Topic.objects.all()
-    questions = Question.objects.all().order_by('-answer__created_at') 
+    questions = Question.objects.all()
     if request.method == "POST":
         form = AnswerForm(request.POST)
         if form.is_valid():

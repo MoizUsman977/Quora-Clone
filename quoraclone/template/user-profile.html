@@ -1,31 +1,43 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% block userProfile %}
-    <div>
-        <span>Moiz</span>
+{% load cloudinary %}
+{% load static %}
+
+<div class="profile-root">
+    <div class="profile-page-user">
+        <div class="user-name-image">
+            <img src="{{ user.profile_picture.url }}" height="130px" width ="130px" class="profile-pic" alt="Profile Picture">
+            <span>{{user.name}}</span>
+        </div>
+        <a href="{% url 'editUser' %}"> Edit Your Profile </a>
     </div>
-    <div>
+    <div class="profile-tabs">
         <a href="{% url 'profile' %}">Profile</a>
-        <a href="{% url 'answers' %}">Answers</a>
-        <a href="{% url 'questions' %}">Questions</a>
-        <a href="{% url 'usertopics' %}">Topics</a>
+        <a href="{% url 'answers' %}">Answers ({{total_answers}})</a>
+        <a href="{% url 'questions' %}">Questions ({{total_questions}})</a>
+        <a href="{% url 'usertopics' %}">Topics ({{total_topics}})</a>
         <a href="#">Following</a>
     </div>
     <div>{{ my_data }}</div>
     
-        {% block profile %}
-        {% endblock profile %}
-    
-        {% block answer %}
-        {% endblock answer %}
-        
-        {% block question %}
-        {% endblock question %}
-        
-        {% block usertopic %}
-        {% endblock usertopic %}
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+    {% endblock extra_css %}
 
-        {% block edituserdata %}
-        {% endblock edituserdata %}
-        
-    {% endblock userProfile %}
+    {% block profile %}
+    {% endblock profile %}
     
+    {% block answer %}
+    {% endblock answer %}
+    
+    {% block question %}
+    {% endblock question %}
+    
+    {% block usertopic %}
+    {% endblock usertopic %}
+    
+    {% block edituserdata %}
+    {% endblock edituserdata %}
+        
+</div>
+{% endblock userProfile %}

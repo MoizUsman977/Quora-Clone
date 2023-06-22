@@ -1,8 +1,35 @@
 {% extends 'user-profile.html' %}
-
+{% load static %}
 {% block answer %}
-<h1>Your Answers</h1>
-{% for answer in user_answers %}
-    <p>{{ answer }}</p>
-{% endfor %}
+<div class="root-answer">
+    <h1>Your Answers</h1>
+    {% for answer in answer_obj %}
+    <div class="user-answers">
+        <p>{{ answer_obj.start_index|add:forloop.counter0 }}: {{answer}}</p>
+        <p>Date: <span>{{answer.created_at}} </span></p>
+    </div>
+    {% endfor %}
+    <br />
+    <div class="pagination">
+        <span class="step-links">
+            {% if answer_obj.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ answer_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ answer_obj.number }} of {{ answer_obj.paginator.num_pages }}.
+            </span>
+
+            {% if answer_obj.has_next %}
+                <a href="?page={{ answer_obj.next_page_number }}">Next</a>
+                <a href="?page={{ answer_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/useranswers.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
 {% endblock %}
