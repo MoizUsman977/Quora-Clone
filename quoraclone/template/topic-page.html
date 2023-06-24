@@ -1,28 +1,93 @@
 {% extends 'base.html' %} 
+{% load static %}
 {% block topic %}
-
-<h1>{{ topic }} ({{total_followers}})</h1>
-<h2> <a href={% url 'follow_page' topic_id=topic.id %}>Follow</a></h2>
-<a href={% url 'add_question' topic_id=topic.id %} >Add Question</a>
-
-{% for question in questions %}
-
-<p>{{ question }}</p>
-<form method="post">
-    {% csrf_token %}
-    {{ form.question_id }}
-    {{ form.as_p }}
-    <input type="hidden" name="question_id" value="{{ question.id }}">
-    <input type="submit" value="Submit Answer">
-</form>
-<ul>
-    {% for answer in question.answer_set.all %}
-    <li>{{ answer }} ({{answer.user.username}})</li>
-    {% endfor %}
-</ul>
-
-{% endfor %} 
-{% endblock %}
-
-
-{% block addquestion %}{% endblock addquestion %}
+<div class="main-home">
+    <div class="home-topic">
+      <h3>Trending Topics</h3>
+      {% for topic in topics %}
+      <a href="{% url 'topic_questions' topic.id %}">{{ topic }}</a>
+      {% endfor %}
+    </div>
+        
+        <div class="home-questions">
+            <div class="topic-details">
+                <img
+                src="{{ topic.topic_pictures.url }}"
+                height="400px"
+                width="100%px"
+                alt="Topic Picture"
+                />
+                <h1>{{ topic }} </h1>
+                <h3>{{ topic.description }}</h3>
+                {% if is_following %}
+                <h3> <a href={% url 'follow_page' topic_id=topic.id %}>Following</a> ({{total_followers}})</h3>
+                {% else %}
+                    <h3> <a href={% url 'follow_page' topic_id=topic.id %}>Follow</a> ({{total_followers}})</h3>
+                {% endif %}
+                <a href={% url 'add_question' topic_id=topic.id %} >Add Question</a>
+            </div>
+            {% for question in questions %}
+            <div class="single-home-question">
+              <div class="question-creator-time">
+                {% if question.user.profile_picture %}
+                <img
+                  src="{{ question.user.profile_picture.url }}"
+                  height="50px"
+                  width="50px"
+                  alt="Profile Picture"
+                />
+                {% else %}
+                <span>{{ answer.user.username|slice:":1"|upper }}</span>
+                {% endif %}
+                <div class="question-creator">
+                  <span>{{ question.user.username }}</span>
+                  <span>{{ question.created_at }}</span>
+                </div>
+              </div>
+              <div class="question">
+                <span class="question-text">{{ question }}</span>
+                <div class="likedislike" style="margin-left: 10px">
+                  <a href="{% url 'likequestion' question.id %}">Like</a>
+                  <a href="{% url 'dislikequestion' question.id %}">Dislike</a>
+                </div>
+              </div>
+              <form class="answer-form" method="post">
+                <div class="dp">{{question.user.username|slice:":1"|upper }}</div>
+                {% csrf_token %} {{ form.question_id }} {{ form }}
+                <input type="hidden" name="question_id" value="{{ question.id }}" />
+                <button type="submit">Add Comment</button>
+              </form>
+              <div class="home-answers">
+                {% for answer in question.answer_set.all|slice:":2" %}
+                <div class="comment-box">
+                  <div class="dp">{{answer.user.username|slice:":1"|upper }}</div>
+                  <div class="answer-box">
+                    <div class="answer-user-time">
+                      <span>
+                        <a href="{% url 'unauth-user-profile' answer.user.id %}">
+                          {{answer.user.username}}
+                        </a></span
+                      >
+                      <span>{{answer.created_at}}</span>
+                    </div>
+                    <div class="answer">
+                      <div>{{ answer }}</div>
+                      <div class="likedislike">
+                        <a href="{% url 'likeanswer' answer.id %}">Like </a>
+                        <a href="{% url 'dislikeanswer' answer.id %}">Dislike</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div> 
+    </div>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/topicpage.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    {% endblock extra_css %}
+        {% endblock %}
+               

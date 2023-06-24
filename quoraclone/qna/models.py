@@ -27,6 +27,7 @@ class Vote(models.Model):
     question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)
     is_like = models.BooleanField()
+    is_dislike = models.BooleanField()
 
     def __str__(self):
         return f"{self.user.username} voted {self.is_like}"

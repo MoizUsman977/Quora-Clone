@@ -1,10 +1,33 @@
-{% extends 'topic-page.html' %}
-{% block topic %}
+{% extends 'base.html' %}
+{% load static %}
 {% block addquestion %}
-<form class="form-root" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit"> Add Question </button>
-</form>
+<div class="main-home">
+    <div class="home-topic">
+      <h3>Trending Topics</h3>
+      {% for topic in topics %}
+      <a href="{% url 'topic_questions' topic.id %}">{{ topic }}</a>
+      {% endfor %}
+    </div>
+    <div class="addquestion-root">
+        <div class="topic-details">
+            <img
+            src="{{ topic.topic_pictures.url }}"
+            height="400px"
+            width="100%px"
+            alt="Topic Picture"
+            />
+            <h1>{{ topic }} </h1>
+            <h3>{{ topic.description }}</h3>
+        </div>
+        <form class="form-root" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="addbutton" > Add Question </button>
+        </form>
+    </div>
+    {% block extra_css %}
+      <link rel="stylesheet" href="{% static 'styles/addtopic.css' %}">
+      <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+  {% endblock extra_css %}
+
 {% endblock addquestion %}
-{% endblock %}

@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .forms import UserForm, LoginForm
 from .models import User
 
+
+
+
 @ensure_csrf_cookie
 def signup_user(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         form = UserForm(request.POST, request.FILES)
         if form.is_valid():
@@ -22,9 +28,10 @@ def signup_user(request):
         form = UserForm()
     return render(request, 'sign-up.html', {'form': form})
 
-
 @ensure_csrf_cookie
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():

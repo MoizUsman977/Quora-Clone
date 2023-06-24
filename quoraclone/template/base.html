@@ -12,7 +12,7 @@
   </head>
   <body>
     {% include 'includes/navbar.html' %}
-    
+    {% block addquestion %}{% endblock addquestion %}
     {% block home %} {% endblock home %}
     {% block topic %} {% endblock topic %} {% block userProfile %} {% endblock userProfile %} {% block addTopic %} {% endblock addTopic %}
   </body>

@@ -13,16 +13,27 @@
     <div class="single-home-question">
       <div class="question-creator-time">
         {% if question.user.profile_picture %}
-          <img src="{{ question.user.profile_picture.url }}" height="40px" width="40px" alt="Profile Picture">
+        <img
+          src="{{ question.user.profile_picture.url }}"
+          height="40px"
+          width="40px"
+          alt="Profile Picture"
+        />
         {% else %}
-          <span>{{ answer.user.username|slice:":1"|upper }}</span>
+        <span>{{ answer.user.username|slice:":1"|upper }}</span>
         {% endif %}
         <div class="question-creator">
           <span>{{ question.user.username }}</span>
           <span>{{ question.created_at }}</span>
         </div>
       </div>
-      <span class="question-text">{{ question }}</span>
+      <div class="question">
+        <span class="question-text">{{ question }}</span>
+        <div class="likedislike" style="margin-left: 10px">
+          <a href="{% url 'likequestion' question.id %}">Like</a>
+          <a href="{% url 'dislikequestion' question.id %}">Dislike</a>
+        </div>
+      </div>
       <form class="answer-form" method="post">
         <div class="dp">{{question.user.username|slice:":1"|upper }}</div>
         {% csrf_token %} {{ form.question_id }} {{ form }}
@@ -35,10 +46,20 @@
           <div class="dp">{{answer.user.username|slice:":1"|upper }}</div>
           <div class="answer-box">
             <div class="answer-user-time">
-              <span>{{answer.user.username}}</span>
+              <span>
+                <a href="{% url 'unauth-user-profile' answer.user.id %}">
+                  {{answer.user.username}}
+                </a></span
+              >
               <span>{{answer.created_at}}</span>
             </div>
-            <div>{{ answer }}</div>
+            <div class="answer">
+              <div>{{ answer }}</div>
+              <div class="likedislike">
+                <a href="{% url 'likeanswer' answer.id %}">Like </a>
+                <a href="{% url 'dislikeanswer' answer.id %}">Dislike</a>
+              </div>
+            </div>
           </div>
         </div>
         {% endfor %}
