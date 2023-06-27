@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block searchtopic %}
+<div class="main-home">
+    <div class="home-topic">
+        <h3>Trending Topics</h3>
+        {% for topic in topics %}
+        <a href="{% url 'topic_questions' topic.id %}">{{ topic }}</a>
+        {% endfor %}
+    </div>
+    <div>
+        <h1>Search Results for "{{ query }}"</h1>
+        {% if topics %}
+        <ul>
+            {% for topic in topics %}
+            <li> <a href="{% url 'topic_questions' topic.id %}"> {{ topic.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No topics found.</p>
+        {% endif %}
+    </div>
+</div>    
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/home.css' %}">
+<link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
+{% endblock searchtopic %}

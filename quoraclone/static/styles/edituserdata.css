@@ -1,0 +1,39 @@
+.edit-profile-root{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+.user-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    color: #727272;
+}
+.user-form > p >  input{
+    padding: 2px 7px;
+    font-size: 15px;
+}
+.user-form > p >  select{
+    padding: 2px 7px;
+    font-size: 15px;
+}
+.user-form > button{
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background-color: rgb(74, 24, 255);
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 10px 30px;
+    font-weight: 400;
+    color: white;
+}
+.user-form > button:hover{
+    cursor: pointer;
+}

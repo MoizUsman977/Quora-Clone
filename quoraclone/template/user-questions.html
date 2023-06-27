@@ -1,0 +1,36 @@
+{% extends 'user-profile.html' %}
+{% load static %}
+{% block question %}
+<div class="root-question">
+    <h1>Your Questions</h1>
+    {% for question in questions_obj %}
+    <div class="user-questions">
+        <p>{{ questions_obj.start_index|add:forloop.counter0 }}: {{question}}</p>
+        <p>Date: <span>{{question.created_at}} </span></p>
+    </div>
+    {% endfor %}
+    <br />
+    <div class="pagination">
+        <span class="step-links">
+            {% if questions_obj.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ questions_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ questions_obj.number }} of {{ questions_obj.paginator.num_pages }}.
+            </span>
+
+            {% if questions_obj.has_next %}
+                <a href="?page={{ questions_obj.next_page_number }}">Next</a>
+                <a href="?page={{ questions_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/userquestions.css' %}">
+<link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'user-profile.html' %}
+{% load static %}
+{% block edituserdata %}
+<div class="edit-profile-root">
+  <h1>Edit User Data</h1>
+  <form method="post" class="user-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/edituserdata.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
+{% endblock edituserdata %}

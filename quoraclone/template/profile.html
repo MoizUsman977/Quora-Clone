@@ -1,0 +1,18 @@
+{% extends 'user-profile.html' %}
+{% load static %}
+{% block profile %}
+<div class="root-profile">    
+    <h1>User Profile</h1>
+    <div class="user-data">
+        <p>Name:  <span>{{ user.name }} </span></p>
+        <p>Email:  <span>{{ user.email }} </span></p>
+        <p>Username:  <span>{{ user.username }} </span></p>
+        <p>Age:  <span>{{ user.age }} </span></p>
+        <p>Gender:  <span>{{ user.gender }} </span></p>
+    </div>
+</div>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+{% endblock extra_css %}
+{% endblock %}

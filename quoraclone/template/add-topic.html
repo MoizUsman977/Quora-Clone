@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block addTopic %}
+<div class="main-home">
+  <div class="home-topic">
+    <h3>Trending Topics</h3>
+    {% for topic in topics %}
+    <a href="{% url 'topic_questions' topic.id %}">{{ topic }}</a>
+    {% endfor %}
+  </div>
+  <div class="addtopic-root">
+    <h2>Create Topic</h2>
+    <form method="post" class="addtopic-form" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="addbutton" >Create</button>
+    </form>
+  </div>
+  {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/addtopic.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+{% endblock extra_css %}
+{% endblock %}

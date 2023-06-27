@@ -1,0 +1,27 @@
+.root-question{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+.user-questions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 14px;
+}
+.user-questions > p:nth-child(1){
+    color: black;
+    font-size: 18px;
+}
+.user-questions > p:nth-child(2){
+    color: #727272;
+}
+
+.user-questions > p > span{
+    color: black;
+    font-size: 14px;
+}

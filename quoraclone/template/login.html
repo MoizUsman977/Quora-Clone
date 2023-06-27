@@ -8,18 +8,6 @@
     <link rel="stylesheet" type="text/css" href=" {% static '/styles/login.css' %} ">
     <title>Quora Clone</title>
 </head>
-<style>
-    .login-root {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-image: url('{% static '/images/signup-bg.webp' %}');
-    }
-</style>
 <body>
     <div class="login-root">
         <div class="login-box">
@@ -29,7 +17,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="login-button">
-                    <span>Forgot Your Password</span>
+                    <span><a href="{% url 'password_reset' %}">Forgot Your Password</a></span>
                     <button type="submit">Login</button>
                 </div>
                 <div class="signup-route">

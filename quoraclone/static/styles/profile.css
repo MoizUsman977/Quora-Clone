@@ -1,0 +1,22 @@
+.root-profile{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+.user-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+.user-data > p{
+    color: #727272;
+}
+.user-data > p > span{
+    font-weight: bolder;
+    color: black;
+}

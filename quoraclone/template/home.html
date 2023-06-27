@@ -1,20 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>User List</h1>
-    <ul>
-    {% for user in users %}
-        <li>{{ user.name }}</li>
-        <li>{{ user.age }}</li>
-        <li>{{ user.email }}</li>
-        <li>{{ user.password }}</li>
+{% extends 'base.html' %} {% block home %} {% load cloudinary %}
+
+<div class="main-home">
+  <div class="home-topic">
+    <h3>Trending Topics</h3>
+    {% for topic in topics|slice:":10" %}
+    <a href="{% url 'topic_questions' topic.id %}">{{ topic }}</a>
     {% endfor %}
-    </ul>
-</body>
-</html>
+  </div>
+
+  <div class="home-questions">
+    {% for question in questions %}
+    <div class="single-home-question">
+      <div class="question-creator-time">
+        {% if question.user.profile_picture %}
+        <img
+          src="{{ question.user.profile_picture.url }}"
+          height="40px"
+          width="40px"
+          alt="Profile Picture"
+        />
+        {% else %}
+        <span>{{ answer.user.username|slice:":1"|upper }}</span>
+        {% endif %}
+        <div class="question-creator">
+          <span>{{ question.user.username }}</span>
+          <span>{{ question.created_at }}</span>
+        </div>
+      </div>
+      <div class="question">
+        <span class="question-text">{{ question }}</span>
+        <div class="likedislike" style="margin-left: 10px">
+          <a href="{% url 'likequestion' question.id %}">Like</a>
+          <a href="{% url 'dislikequestion' question.id %}">Dislike</a>
+        </div>
+      </div>
+      <form class="answer-form" method="post">
+        <div class="dp">{{question.user.username|slice:":1"|upper }}</div>
+        {% csrf_token %} {{ form.question_id }} {{ form }}
+        <input type="hidden" name="question_id" value="{{ question.id }}" />
+        <button type="submit">Add Comment</button>
+      </form>
+      <div class="home-answers">
+        {% for answer in question.answer_set.all|slice:":2" %}
+        <div class="comment-box">
+          <div class="dp">{{answer.user.username|slice:":1"|upper }}</div>
+          <div class="answer-box">
+            <div class="answer-user-time">
+              <span>
+                <a href="{% url 'unauth-user-profile' answer.user.id %}">
+                  {{answer.user.username}}
+                </a></span
+              >
+              <span>{{answer.created_at}}</span>
+            </div>
+            <div class="answer">
+              <div>{{ answer }}</div>
+              <div class="likedislike">
+                <a href="{% url 'likeanswer' answer.id %}">Like </a>
+                <a href="{% url 'dislikeanswer' answer.id %}">Dislike</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock home %}

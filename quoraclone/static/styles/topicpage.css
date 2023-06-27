@@ -1,0 +1,9 @@
+.topic-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+}

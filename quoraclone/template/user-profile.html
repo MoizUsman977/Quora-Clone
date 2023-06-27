@@ -1,0 +1,55 @@
+{% extends 'base.html' %} 
+{% block userProfile %}
+{% load cloudinary %}
+{% load static %}
+
+<div class="profile-root">
+    <div class="profile-page-user">
+        <div class="user-name-image">
+            <img src="{{ user.profile_picture.url }}" height="130px" width ="130px" class="profile-pic" alt="Profile Picture">
+            <span>{{user.name}}</span>
+        </div>
+        {% if isAuthenticatedUser %}
+        <a href="{% url 'editUser' %}"> Edit Your Profile </a>
+        {% endif %}
+    </div>
+    {% if isAuthenticatedUser %}
+        <div class="profile-tabs">
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'answers' %}">Answers ({{total_answers}})</a>
+            <a href="{% url 'questions' %}">Questions ({{total_questions}})</a>
+            <a href="{% url 'usertopics' %}">Topics ({{total_topics}})</a>
+            <a href="#">Following</a>
+        </div>
+    {% else %}    
+        <div class="profile-tabs">
+            <a href={% url 'unauth-profile' user_id=user.id %}>Profile</a>
+            <a href={% url 'unauth-answers' user_id=user.id %}>Answers ({{total_answers}})</a>
+            <a href={% url 'unauth-questions' user_id=user.id %}>Questions ({{total_questions}})</a>
+            <a href={% url 'unauth-usertopics' user_id=user.id %}>Topics ({{total_topics}})</a>
+            <a href="#">Following</a>
+        </div>
+    {% endif %}
+    <div>{{ my_data }}</div>
+    
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
+    {% endblock extra_css %}
+
+    {% block profile %}
+    {% endblock profile %}
+    
+    {% block answer %}
+    {% endblock answer %}
+    
+    {% block question %}
+    {% endblock question %}
+    
+    {% block usertopic %}
+    {% endblock usertopic %}
+    
+    {% block edituserdata %}
+    {% endblock edituserdata %}
+        
+</div>
+{% endblock userProfile %}
