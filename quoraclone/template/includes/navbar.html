@@ -7,6 +7,10 @@
     <a href="{% url 'addtopic' %}">Add Topic</a>
   </div>
   <div class="nav-item">
+    <form action="{% url 'search_topics' %}" method="GET">
+      <input type="text" name="q" placeholder="Search topics">
+      <button type="submit">Search</button>
+    </form>
     <a class="logout-button" href="{% url 'logout' %}">Logout</a>
   </div>
 </div>

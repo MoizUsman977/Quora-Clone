@@ -2,6 +2,16 @@ body{
     margin:0;
     padding:0;
 }
+.signup-root {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../images/signup-bg.webp');
+  }
 .signup-box{
     display: flex;
     width: 500px;

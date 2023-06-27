@@ -36,6 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     profile_picture = CloudinaryField('profile_pictures')
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
     objects = CustomUserManager()

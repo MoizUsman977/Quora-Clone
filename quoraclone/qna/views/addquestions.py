@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from qna.forms import QuestionForm
 from topics.models import Topic
+from qna.forms import QuestionForm
 from qna.models import Question
+
 
 def add_question(request, topic_id):
     topics = Topic.objects.all()

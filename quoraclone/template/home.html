@@ -3,7 +3,7 @@
 <div class="main-home">
   <div class="home-topic">
     <h3>Trending Topics</h3>
-    {% for topic in topics %}
+    {% for topic in topics|slice:":10" %}
     <a href="{% url 'topic_questions' topic.id %}">{{ topic }}</a>
     {% endfor %}
   </div>

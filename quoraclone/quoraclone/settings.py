@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 import os
 import cloudinary
 load_dotenv()
+import dj_database_url
+
 """
 Django settings for quoraclone project.
 
@@ -27,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG'),
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -86,6 +88,10 @@ WSGI_APPLICATION = 'quoraclone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://quora_clone_zh0r_user:6VXpQQP2HQGavmnqNR8ddVvb4L2SxMA9@dpg-cicp8clph6eoptno2fvg-a.oregon-postgres.render.com/quora_clone_zh0r')
+# }
+
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
@@ -96,6 +102,7 @@ DATABASES = {
         'PORT': '',
     }
 }
+
 
 cloudinary.config( 
   cloud_name = os.environ.get('cloud_name'), 
@@ -142,11 +149,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+MEDIA_URL = 'images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'images')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.elasticemail.com'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'moizbutt977@gmail.com'
+EMAIL_HOST_PASSWORD = 'ED4E5CA3A376F90F108306476A0FFFA7356D'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'moeezbutt977@gmail.com'

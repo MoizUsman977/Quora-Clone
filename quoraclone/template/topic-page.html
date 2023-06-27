@@ -58,7 +58,7 @@
                 <button type="submit">Add Comment</button>
               </form>
               <div class="home-answers">
-                {% for answer in question.answer_set.all|slice:":2" %}
+                {% for answer in question.answer_set.all %}
                 <div class="comment-box">
                   <div class="dp">{{answer.user.username|slice:":1"|upper }}</div>
                   <div class="answer-box">
@@ -83,11 +83,29 @@
               </div>
             </div>
             {% endfor %}
+            <div class="pagination">
+              <span class="step-links">
+                  {% if questions.has_previous %}
+                      <a href="?page=1">&laquo; First</a>
+                      <a href="?page={{ questions.previous_page_number }}">Previous</a>
+                  {% endif %}
+      
+                  <span class="current">
+                      Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
+                  </span>
+      
+                  {% if questions.has_next %}
+                      <a href="?page={{ questions.next_page_number }}">Next</a>
+                      <a href="?page={{ questions.paginator.num_pages }}">Last &raquo;</a>
+                  {% endif %}
+              </span>
+          </div>
           </div> 
     </div>
     {% block extra_css %}
     <link rel="stylesheet" href="{% static 'styles/topicpage.css' %}">
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/userprofile.css' %}">
     {% endblock extra_css %}
         {% endblock %}
                

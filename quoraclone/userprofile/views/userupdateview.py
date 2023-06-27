@@ -1,3 +1,7 @@
+from authentication.models import User
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
