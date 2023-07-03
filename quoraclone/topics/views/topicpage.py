@@ -14,7 +14,7 @@ def topic_page(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     total_followers = topic.followers.count()
     is_following = topic.followers.filter(id=user.id).exists()
-    question = Question.objects.filter(topic=topic)
+    question = Question.objects.filter(topic=topic).order_by('created_at')
     paginator = Paginator(question, 2)
     page_number = request.GET.get('page')
     questions = paginator.get_page(page_number)
@@ -28,4 +28,4 @@ def topic_page(request, topic_id):
             return redirect('topic_questions', topic_id=topic_id)
     else:
         form = AnswerForm()
-    return render(request, 'topic-page.html', {'is_following':is_following, 'topics': topics, 'topic': topic, 'questions': questions, 'form': form, "total_followers":total_followers})
+    return render(request, 'topic-page.html', {'is_following': is_following, 'topics': topics, 'topic': topic, 'questions': questions, 'form': form, "total_followers":total_followers})

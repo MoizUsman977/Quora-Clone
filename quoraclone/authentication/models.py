@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.exceptions import ValidationError
 from django.db import models
 from cloudinary.models import CloudinaryField
 
@@ -43,3 +44,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+    
+    def clean(self):
+        super().clean()
+
+        if self.age > 120:
+            raise ValidationError("Age cannot be more than 120.")
+
+        if not self.password:
+            raise ValidationError("Password is required.")
+
+        if not self.name.isalpha():
+            raise ValidationError("Name should only contain alphabetic characters.")
+
+        if not self.username.isalnum():
+            raise ValidationError("Username should only contain alphanumeric characters.")
