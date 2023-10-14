@@ -11,7 +11,7 @@ class UserAnswers(LoginRequiredMixin, TemplateView, TotalCountsMixin):
     def get_context_data(self, **kwargs):
         user = self.request.user
         total_questions, total_answers, total_topics, isAuthenticatedUser = self.get_total_counts(user)
-        answers = Answer.objects.filter(user = user)
+        answers = Answer.objects.filter(user = user).order_by('created_at')
         paginator = Paginator(answers, 5)
         page_number = self.request.GET.get('page')
         answer_obj = paginator.get_page(page_number)
